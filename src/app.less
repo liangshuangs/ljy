@@ -1,0 +1,202 @@
+// Less 变量定义
+@primary-color: #007bff;
+@secondary-color: #6c757d;
+@success-color: #28a745;
+@warning-color: #ffc107;
+@danger-color: #dc3545;
+@light-color: #f8f9fa;
+@dark-color: #343a40;
+
+// 字体和尺寸
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+@font-size-base: 16px;
+@line-height-base: 1.5;
+
+// 间距
+@spacing-xs: 4px;
+@spacing-sm: 8px;
+@spacing-md: 16px;
+@spacing-lg: 24px;
+@spacing-xl: 32px;
+
+// 边框和阴影
+@border-radius: 4px;
+@box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+// 全局样式重置
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: @font-family;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @dark-color;
+  background-color: @light-color;
+}
+
+// 容器样式
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 @spacing-md;
+}
+
+// 按钮样式 Mixin
+.button-style(@bg-color, @text-color: white) {
+  padding: @spacing-sm @spacing-md;
+  border: none;
+  border-radius: @border-radius;
+  background-color: @bg-color;
+  color: @text-color;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: @font-size-base;
+  
+  &:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 卡片样式
+.card {
+  background: white;
+  border-radius: @border-radius;
+  box-shadow: @box-shadow;
+  padding: @spacing-lg;
+  margin-bottom: @spacing-md;
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: @spacing-md;
+    color: @dark-color;
+  }
+  
+  .card-content {
+    color: @secondary-color;
+    line-height: 1.6;
+  }
+}
+
+// 导航栏样式
+.navbar {
+  background-color: white;
+  box-shadow: @box-shadow;
+  padding: @spacing-md 0;
+  
+  .nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: @primary-color;
+    text-decoration: none;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: @spacing-lg;
+    list-style: none;
+    
+    a {
+      color: @dark-color;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+// 表单样式
+.form-group {
+  margin-bottom: @spacing-md;
+  
+  label {
+    display: block;
+    margin-bottom: @spacing-xs;
+    font-weight: 500;
+    color: @dark-color;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: @spacing-sm;
+    border: 1px solid #ddd;
+    border-radius: @border-radius;
+    font-size: @font-size-base;
+    transition: border-color 0.3s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: @primary-color;
+    }
+  }
+}
+
+// 按钮类
+.btn {
+  .button-style(@primary-color);
+  
+  &.btn-secondary {
+    .button-style(@secondary-color);
+  }
+  
+  &.btn-success {
+    .button-style(@success-color);
+  }
+  
+  &.btn-warning {
+    .button-style(@warning-color, @dark-color);
+  }
+  
+  &.btn-danger {
+    .button-style(@danger-color);
+  }
+}
+
+// 网格系统
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -@spacing-sm;
+}
+
+.col {
+  flex: 1;
+  padding: 0 @spacing-sm;
+  
+  &.col-2 { flex: 0 0 16.666667%; }
+  &.col-3 { flex: 0 0 25%; }
+  &.col-4 { flex: 0 0 33.333333%; }
+  &.col-6 { flex: 0 0 50%; }
+  &.col-8 { flex: 0 0 66.666667%; }
+  &.col-9 { flex: 0 0 75%; }
+  &.col-12 { flex: 0 0 100%; }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .container {
+    padding: 0 @spacing-sm;
+  }
+  
+  .col {
+    flex: 0 0 100%;
+    margin-bottom: @spacing-md;
+  }
+  
+  .navbar .nav-links {
+    flex-direction: column;
+    gap: @spacing-sm;
+  }
+}
